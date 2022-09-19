@@ -4,6 +4,10 @@
   "description": "",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/XantreGodlike/use-common-hook.git"
+  },
   "scripts": {
     "build": "rimraf dist/ && prettier --write src/**/*.ts && npm run build:esm && npm run build:cjs",
     "build:esm": "tsc",
