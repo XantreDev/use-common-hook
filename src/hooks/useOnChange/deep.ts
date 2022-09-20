@@ -1,7 +1,7 @@
 import deepEqual from "fast-deep-equal/es6";
 import {
   useOnChange as useOnChangeDefault,
-  useOnChangeWithoutInit as useOnChangeWithoutInitDefault
+  useOnChangeWithoutInit as useOnChangeWithoutInitDefault,
 } from ".";
 
 export const useOnChangeWithoutInit = <T>({

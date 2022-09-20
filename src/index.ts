@@ -3,21 +3,20 @@ export { useConstant } from "./hooks/useConstant";
 export { useIsFirstCall } from "./hooks/useIsFirstCall";
 export {
   useOnChange as useOnChangeCompare,
-  useOnChangeWithoutInit as useOnChangeWithoutInitCompare
+  useOnChangeWithoutInit as useOnChangeWithoutInitCompare,
 } from "./hooks/useOnChange";
 export {
   useOnChange as useOnChangeDeep,
-  useOnChangeWithoutInit as useOnChangeWithoutInitDeep
+  useOnChangeWithoutInit as useOnChangeWithoutInitDeep,
 } from "./hooks/useOnChange/deep";
 export {
   useOnChange,
-  useOnChangeWithoutInit
+  useOnChangeWithoutInit,
 } from "./hooks/useOnChange/shallow";
 export { useRenderEffect, useRenderEffectDeep } from "./hooks/useRenderEffect";
 export { useStableCallback } from "./hooks/useStableCallback";
 export {
   useStateWithGetter,
-  UseStateWithGetterResult
+  UseStateWithGetterResult,
 } from "./hooks/useStateWithGetter";
 export { useToggle } from "./hooks/useToggle";
-

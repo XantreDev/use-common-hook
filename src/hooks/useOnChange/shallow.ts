@@ -1,6 +1,6 @@
 import {
   useOnChange as useOnChangeDefault,
-  useOnChangeWithoutInit as useOnChangeWithoutInitDefault
+  useOnChangeWithoutInit as useOnChangeWithoutInitDefault,
 } from ".";
 import { shallowEqual } from "../../utils/shallowEqual";
 
