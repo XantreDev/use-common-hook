@@ -13,6 +13,7 @@ export {
   useOnChange,
   useOnChangeWithoutInit,
 } from "./hooks/useOnChange/shallow";
+export { usePreviousValue } from "./hooks/usePreviousValue";
 export { useRenderEffect, useRenderEffectDeep } from "./hooks/useRenderEffect";
 export { useStableCallback } from "./hooks/useStableCallback";
 export {
