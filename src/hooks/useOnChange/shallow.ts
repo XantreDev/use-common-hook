@@ -1,36 +1,23 @@
-import { useRef } from "react";
+import {
+  useOnChange as useOnChangeDefault,
+  useOnChangeWithoutInit as useOnChangeWithoutInitDefault
+} from ".";
 import { shallowEqual } from "../../utils/shallowEqual";
-import { useIsFirstCall } from "../useIsFirstCall";
 
 export const useOnChangeWithoutInit = <T>({
   comparer = shallowEqual,
-  deps,
-  onChange,
+  ...props
 }: {
   deps: T;
   comparer?: (a: T, b: T) => boolean;
   onChange: (value: T) => void;
-}): void => {
-  const prevDeps = useRef(deps);
-
-  if (prevDeps.current !== deps && !comparer(prevDeps.current, deps)) {
-    onChange(deps);
-    prevDeps.current = deps;
-  }
-};
+}): void => useOnChangeWithoutInitDefault({ comparer, ...props });
 
 export const useOnChange = <T>({
   comparer = shallowEqual,
-  deps,
-  onChange,
+  ...props
 }: {
   deps: T;
   comparer?: (a: T, b: T) => boolean;
   onChange: (value: T) => void;
-}): void => {
-  if (useIsFirstCall()()) {
-    onChange(deps);
-  }
-
-  useOnChangeWithoutInit({ comparer, deps, onChange });
-};
+}): void => useOnChangeDefault({ comparer, ...props });
