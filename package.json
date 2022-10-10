@@ -1,6 +1,6 @@
 {
   "name": "use-common-hook",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -15,7 +15,7 @@
     "build:cjs": "tsc --module CommonJS --outDir dist/cjs"
   },
   "peerDependencies": {
-    "react": "^16.11.0"
+    "react": "^16.11.0 || ^17.0.0 || ^18.0.0"
   },
   "keywords": [],
   "author": "XantreGodlike",
