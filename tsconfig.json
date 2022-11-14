@@ -9,7 +9,7 @@
     "outDir": "dist/esm",
     "target": "ES6",
     "moduleResolution": "Node",
-    "lib": ["ESNext"]
+    "lib": ["ESNext", "DOM"]
   },
   "include": ["src"]
 }
