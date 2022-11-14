@@ -3,14 +3,14 @@ import { useEffect } from "react";
 import type { Key } from "./../types/keys";
 import { useActualRef } from "./useActualRef";
 
-type KeyObject = {
+export type KeyObject = {
   key: Key;
   ctrlKey?: boolean;
   altKey?: boolean;
   shiftKey?: boolean;
 };
 
-export type KeyAction = {
+export type UseKeydownAction = {
   key: KeyObject | Key;
   action: (e: KeyboardEvent) => any | null;
 };
@@ -20,7 +20,7 @@ const compareKeyAttribute = (
   matchValue: undefined | boolean
 ) => typeof matchValue === "undefined" || matchValue === realValue;
 
-const actionsHandler = (actions: KeyAction[]) => (e: KeyboardEvent) => {
+const actionsHandler = (actions: UseKeydownAction[]) => (e: KeyboardEvent) => {
   actions.forEach(({ key, action }) => {
     if (typeof key === "string") {
       return e.key === key && action?.(e);
@@ -37,7 +37,7 @@ const actionsHandler = (actions: KeyAction[]) => (e: KeyboardEvent) => {
   });
 };
 
-export const useOnKeydown = (...actions: KeyAction[]) => {
+export const useOnKeydown = (...actions: UseKeydownAction[]) => {
   const currentActions = useActualRef(actions);
 
   useEffect(() => {
