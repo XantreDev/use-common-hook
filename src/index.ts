@@ -14,10 +14,7 @@ export {
   useOnChange,
   useOnChangeWithoutInit
 } from "./hooks/useOnChange/shallow";
-export {
-  UseKeydownAction as KeyAction,
-  useOnKeydown
-} from "./hooks/useOnKeydown";
+export { UseKeydownAction, useOnKeydown } from "./hooks/useOnKeydown";
 export { usePreviousValue } from "./hooks/usePreviousValue";
 export { useRenderEffect, useRenderEffectDeep } from "./hooks/useRenderEffect";
 export { useStabilizedValue } from "./hooks/useStabilizedValue";
