@@ -4,15 +4,15 @@ export { useIsFirstCall } from "./hooks/useIsFirstCall";
 export { useMemoCompare } from "./hooks/useMemoCompare";
 export {
   useOnChange as useOnChangeCompare,
-  useOnChangeWithoutInit as useOnChangeWithoutInitCompare
+  useOnChangeWithoutInit as useOnChangeWithoutInitCompare,
 } from "./hooks/useOnChange";
 export {
   useOnChange as useOnChangeDeep,
-  useOnChangeWithoutInit as useOnChangeWithoutInitDeep
+  useOnChangeWithoutInit as useOnChangeWithoutInitDeep,
 } from "./hooks/useOnChange/deep";
 export {
   useOnChange,
-  useOnChangeWithoutInit
+  useOnChangeWithoutInit,
 } from "./hooks/useOnChange/shallow";
 export { UseKeydownAction, useOnKeydown } from "./hooks/useOnKeydown";
 export { usePreviousValue } from "./hooks/usePreviousValue";
@@ -22,8 +22,7 @@ export { useStabilizedValue } from "./hooks/useStabilizedValue";
 export { useStableCallback } from "./hooks/useStableCallback";
 export {
   useStateWithGetter,
-  UseStateWithGetterResult
+  UseStateWithGetterResult,
 } from "./hooks/useStateWithGetter";
 export { useToggle } from "./hooks/useToggle";
 export type { Key } from "./types/keys";
-

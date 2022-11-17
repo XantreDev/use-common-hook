@@ -4,6 +4,16 @@ export const shallowEqual = (a: unknown, b: unknown) => {
   if (is(a, b)) return true;
   if (!(a instanceof Object) || !(b instanceof Object)) return false;
 
+  if (Array.isArray(a) || Array.isArray(b)) {
+    if (!Array.isArray(a) || !Array.isArray(b)) return false;
+    if (a.length !== b.length) return false;
+
+    for (let i = 0; i < a.length; i++) {
+      if (!is(a[i], b[i])) return false;
+    }
+    return true;
+  }
+
   const keys = Object.keys(a) as (keyof typeof a)[];
   const length = keys.length;
 
