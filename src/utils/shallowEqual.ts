@@ -1,24 +1,18 @@
 const is = Object.is;
+const getKeys = Object.keys as <T>(
+  value: T
+) => (keyof T extends never ? string : keyof T)[];
 
 export const shallowEqual = (a: unknown, b: unknown) => {
   if (is(a, b)) return true;
-  if (!(a instanceof Object) || !(b instanceof Object)) return false;
+  if (typeof a !== "object" || typeof b !== "object" || !a || !b) return false;
 
-  if (Array.isArray(a) || Array.isArray(b)) {
-    if (!Array.isArray(a) || !Array.isArray(b)) return false;
-    if (a.length !== b.length) return false;
-
-    for (let i = 0; i < a.length; i++) {
-      if (!is(a[i], b[i])) return false;
-    }
-    return true;
-  }
-
-  const keys = Object.keys(a) as (keyof typeof a)[];
+  const keys = getKeys(a);
   const length = keys.length;
 
   for (let i = 0; i < length; i++)
-    if (!(keys[i] in b) || !is(a[keys[i]] as any, b[keys[i]])) return false;
+    if (!(keys[i] in b) || !is((a as any)[keys[i]], (b as any)[keys[i]]))
+      return false;
 
   return length === Object.keys(b).length;
 };
