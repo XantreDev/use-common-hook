@@ -1,10 +1,11 @@
 import { useRef } from "react";
+import { EMPTY_SYMBOL } from "../constants";
 
-export const useConstant = <T>(initializer: () => Exclude<T, null>) => {
-  const ref = useRef<T>(null);
-  if (ref.current === null) {
-    (ref.current as any) = initializer();
+export const useConstant = <T>(initializer: () => T) => {
+  const ref = useRef<T | typeof EMPTY_SYMBOL>(EMPTY_SYMBOL);
+  if (ref.current === EMPTY_SYMBOL) {
+    ref.current = initializer();
   }
 
-  return ref.current as T extends null ? never : T;
+  return ref.current as T;
 };

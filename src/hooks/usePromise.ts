@@ -1,9 +1,37 @@
 import { useDebugValue, useEffect } from "react";
+import { EMPTY_SYMBOL } from "../constants";
 
-const cache = new Map<
-  symbol,
-  { result: any; error: any; removeTimeout?: undefined | number }
->();
+type CacheNode = {
+  result: any | typeof EMPTY_SYMBOL;
+  error: any | typeof EMPTY_SYMBOL;
+  removeTimeout: undefined | number | NodeJS.Timeout;
+  promise: Promise<any> | typeof EMPTY_SYMBOL;
+};
+
+const cache = new Map<symbol, CacheNode>();
+
+const initCache = (symbol: symbol) => {
+  const newCacheNode: CacheNode = {
+    error: EMPTY_SYMBOL,
+    removeTimeout: undefined,
+    promise: EMPTY_SYMBOL as any,
+    result: EMPTY_SYMBOL as any,
+  };
+
+  cache.set(symbol, newCacheNode);
+};
+
+const cacheSet =
+  <Key extends keyof CacheNode>(symbol: symbol, key: Key) =>
+  (value: CacheNode[Key]) => {
+    const currentCache = cache.get(symbol);
+    if (currentCache) {
+      return (currentCache[key] = value);
+    }
+
+    initCache(symbol);
+    cacheSet(symbol, key)(value);
+  };
 
 const usePromiseInternal = <T>(
   promiseGetter: () => Promise<T>,
@@ -14,8 +42,8 @@ const usePromiseInternal = <T>(
     clearTimeout(timeout);
 
     return () => {
-      const cacheData = cache.get(symbol);
       const timeout = setTimeout(() => cache.delete(symbol), 1_000);
+      const cacheData = cache.get(symbol);
       if (cacheData) {
         cacheData.removeTimeout = timeout;
       }
@@ -24,16 +52,20 @@ const usePromiseInternal = <T>(
 
   const possibleResult = cache.get(symbol);
   useDebugValue(possibleResult?.result);
-  if (possibleResult) {
-    const { error, result } = possibleResult;
 
-    if (error) throw error;
-    return result;
+  if (possibleResult && possibleResult?.error !== EMPTY_SYMBOL) {
+    throw possibleResult.error;
   }
+  if (possibleResult && possibleResult?.result !== EMPTY_SYMBOL)
+    return possibleResult.result;
+  if (possibleResult && possibleResult?.promise !== EMPTY_SYMBOL)
+    throw possibleResult.promise;
 
+  initCache(symbol);
   const promise = promiseGetter()
-    .then((result) => cache.set(symbol, { result, error: null }))
-    .catch((error) => cache.set(symbol, { error, result: null }));
+    .then(cacheSet(symbol, "result"))
+    .catch(cacheSet(symbol, "error"));
+  cacheSet(symbol, "promise")(promise);
 
   throw promise;
 };

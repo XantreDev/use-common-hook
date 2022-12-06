@@ -7,7 +7,7 @@
     "sourceMap": true,
     "strict": true,
     "outDir": "dist/esm",
-    "target": "ES6",
+    "target": "ESNext",
     "moduleResolution": "Node",
     "lib": ["ESNext", "DOM"]
   },
