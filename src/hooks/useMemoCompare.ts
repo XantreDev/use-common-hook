@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { is } from "../utils/objectFunctions";
 
 export const useMemoCompare = <T>(
   value: T,
@@ -6,7 +7,10 @@ export const useMemoCompare = <T>(
 ) => {
   const memoizedValueRef = useRef(value);
 
-  if (!isEqual(memoizedValueRef.current, value)) {
+  if (
+    !is(memoizedValueRef.current, value) &&
+    !isEqual(memoizedValueRef.current, value)
+  ) {
     memoizedValueRef.current = value;
   }
 

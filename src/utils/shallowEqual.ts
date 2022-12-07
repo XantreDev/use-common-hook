@@ -1,4 +1,5 @@
-const is = Object.is;
+import { is } from "./objectFunctions";
+
 const getKeys = Object.keys as <T>(
   value: T
 ) => (keyof T extends never ? string : keyof T)[];
@@ -6,6 +7,8 @@ const getKeys = Object.keys as <T>(
 export const shallowEqual = (a: unknown, b: unknown) => {
   if (is(a, b)) return true;
   if (typeof a !== "object" || typeof b !== "object" || !a || !b) return false;
+
+  if (Array.isArray(a) !== Array.isArray(b)) return false;
 
   const keys = getKeys(a);
   const length = keys.length;

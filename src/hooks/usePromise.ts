@@ -10,16 +10,12 @@ type CacheNode = {
 
 const cache = new Map<symbol, CacheNode>();
 
-const initCache = (symbol: symbol) => {
-  const newCacheNode: CacheNode = {
-    error: EMPTY_SYMBOL,
-    removeTimeout: undefined,
-    promise: EMPTY_SYMBOL as any,
-    result: EMPTY_SYMBOL as any,
-  };
-
-  cache.set(symbol, newCacheNode);
-};
+const createInitCache = (): CacheNode => ({
+  error: EMPTY_SYMBOL,
+  removeTimeout: undefined,
+  promise: EMPTY_SYMBOL,
+  result: EMPTY_SYMBOL,
+});
 
 const cacheSet =
   <Key extends keyof CacheNode>(symbol: symbol, key: Key) =>
@@ -29,7 +25,7 @@ const cacheSet =
       return (currentCache[key] = value);
     }
 
-    initCache(symbol);
+    cache.set(symbol, createInitCache());
     cacheSet(symbol, key)(value);
   };
 
@@ -61,7 +57,7 @@ const usePromiseInternal = <T>(
   if (possibleResult && possibleResult?.promise !== EMPTY_SYMBOL)
     throw possibleResult.promise;
 
-  initCache(symbol);
+  cache.set(symbol, createInitCache());
   const promise = promiseGetter()
     .then(cacheSet(symbol, "result"))
     .catch(cacheSet(symbol, "error"));

@@ -9,7 +9,8 @@
     "outDir": "dist/esm",
     "target": "ESNext",
     "moduleResolution": "Node",
-    "lib": ["ESNext", "DOM"]
+    "lib": ["ESNext", "DOM"],
+    "jsx": "react-jsx"
   },
   "include": ["src"]
 }
