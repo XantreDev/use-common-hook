@@ -11,10 +11,9 @@ export { useStabilizedValue } from "./hooks/useStabilizedValue";
 export { useStableCallback } from "./hooks/useStableCallback";
 export {
   useStateWithGetter,
-  UseStateWithGetterResult
+  UseStateWithGetterResult,
 } from "./hooks/useStateWithGetter";
 export { useToggle } from "./hooks/useToggle";
 export { deepEqual } from "./reexports/deepEqual";
 export type { Key } from "./types/keys";
 export { shallowEqual } from "./utils/shallowEqual";
-

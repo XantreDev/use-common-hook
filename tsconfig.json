@@ -7,7 +7,7 @@
     "sourceMap": true,
     "strict": true,
     "outDir": "dist/esm",
-    "target": "ESNext",
+    "target": "ES2021",
     "moduleResolution": "Node",
     "lib": ["ESNext", "DOM"],
     "jsx": "react-jsx"

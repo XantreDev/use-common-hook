@@ -13,15 +13,10 @@ export const useStateWithGetter = <T>(initial: T | (() => T)) => {
 
   const setter = useCallback(
     (valueOrCallback: T | ((previousValue: T) => T)) => {
-      if (typeof valueOrCallback !== "function") {
-        const newValue = valueOrCallback;
-        ref.current = newValue;
-        setState(newValue);
-
-        return;
-      }
-
-      const newValue = (valueOrCallback as any)(ref.current);
+      const newValue =
+        typeof valueOrCallback !== "function"
+          ? valueOrCallback
+          : (valueOrCallback as any)(ref.current);
 
       ref.current = newValue;
       setState(newValue);
